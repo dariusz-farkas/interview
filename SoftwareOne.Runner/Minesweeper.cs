@@ -27,7 +27,7 @@ internal class MinesweeperTestData : IEnumerable<object[]>
     {
         yield return
         [
-            new[] { 
+            new[] {
                 "4 4",
                 "* . . .",
                 ". . . .",
@@ -39,8 +39,9 @@ internal class MinesweeperTestData : IEnumerable<object[]>
                 "2 2 1 0",
                 "1 * 1 0",
                 "1 1 1 0"
-            },
-            new[] { 
+            }];
+        yield return [
+        new[] {
                 "3 5",
                 "* * . . .",
                 ". . . . .",
@@ -51,7 +52,7 @@ internal class MinesweeperTestData : IEnumerable<object[]>
                 "3 3 2 0 0",
                 "1 * 1 0 0"
             }
-        ];
+    ];
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

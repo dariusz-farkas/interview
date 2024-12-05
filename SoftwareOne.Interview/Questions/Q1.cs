@@ -1,20 +1,59 @@
-﻿namespace SoftwareOne.Interview.Questions;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class Q1
+namespace SoftwareOne.Interview.Questions;
+
+internal class Q1
 {
-    public class Shape
+    public class Student
     {
-        public virtual void Draw()
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+    };
+
+    public class Course
+    {
+        public int Id { get; set; }
+        public virtual ICollection<Student> Students { get; set; } = null!;
+    }
+
+    public class StudentsDbContext : DbContext
+    {
+        public DbSet<Course> Courses { get; set; } = null!;
+    }
+
+    public void Question1()
+    {
+        using var context = new StudentsDbContext();
+
+        var courses = context.Courses;
+        foreach (var course in courses)
         {
-            Console.WriteLine("Drawing shape");
+            foreach (var student in course.Students)
+            {
+                Console.WriteLine($"{course.Id}: {student.Name}");
+            }
+        }
+    }
+    public void Question2()
+    {
+        IQueryable<Course> GetAllCourses()
+        {
+            using var context = new StudentsDbContext();
+            return context.Courses;
+        }
+
+        var courses = GetAllCourses();
+        foreach (var course in courses)
+        {
+            Console.WriteLine(course.Id);
         }
     }
 
-    public class Circle : Shape
+    public void Test()
     {
-        public override void Draw()
+        for (int i = 0; i < 10; i++)
         {
-            Console.WriteLine("Drawing circle");
+            Task.Factory.StartNew(() => Console.WriteLine(i));
         }
     }
 }

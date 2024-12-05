@@ -1,8 +1,6 @@
 ﻿using SoftwareOne.Runner.Items;
 using Xunit.Abstractions;
 
-using Question = SoftwareOne.Interview.Questions.Q1;
-
 namespace SoftwareOne.Runner.Questions;
 
 public class Q1
@@ -15,13 +13,9 @@ public class Q1
     [Fact]
     public void Test()
     {
-        var s1 = new Question.Shape();
-        s1.Draw();
-
-        var s2 = new Question.Circle();
-        s2.Draw();
-
-        Question.Shape s3 = new Question.Circle();
-        s3.Draw();
+        for (int i = 0; i < 10; i++)
+        {
+            Task.Factory.StartNew(() => Console.WriteLine(i));
+        }
     }
 }

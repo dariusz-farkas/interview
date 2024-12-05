@@ -1,35 +1,21 @@
-﻿#pragma warning disable CA1822
+﻿#pragma warning disable CS8618
+#pragma warning disable CS4014
+
 namespace SoftwareOne.Interview.Questions;
 
 public class Q2
 {
-    public class Shape
+    private static string result;
+
+    public static void Main()
     {
+        SaySomething();
+        Console.WriteLine(result);
     }
 
-    public class Circle : Shape
+    static async Task SaySomething()
     {
-    }
-
-    public class Painter
-    {
-        public void Draw(Shape shape)
-        {
-            Console.WriteLine("Drawing shape");
-        }
-
-        public void Draw(Circle shape)
-        {
-            Console.WriteLine("Drawing circle");
-        }
-    }
-
-    public class PainterProcessor
-    {
-        public void Process(Shape shape)
-        {
-            var painter = new Painter();
-            painter.Draw(shape);
-        }
+        await Task.Delay(50);
+        result = "Hello, World!";
     }
 }

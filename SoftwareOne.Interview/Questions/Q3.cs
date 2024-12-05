@@ -1,52 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+// ReSharper disable All
 
 namespace SoftwareOne.Interview.Questions;
 
-internal class Q3
+public class Q3
 {
-    public class Student
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-    };
+    delegate void Printer();
 
-    public class Course
+    public static void Main()
     {
-        public int Id { get; set; }
-        public virtual ICollection<Student> Students { get; set; } = null!;
-    }
-
-    public class StudentsDbContext : DbContext
-    {
-        public DbSet<Course> Courses { get; set; } = null!;
-    }
-
-    public void Test1()
-    {
-        using var context = new StudentsDbContext();
-
-        var courses = context.Courses;
-        foreach (var course in courses)
+        var printers = new List<Printer>();
+        for (int i = 0; i < 10; i++)
         {
-            foreach (var student in course.Students)
-            {
-                Console.WriteLine($"{course.Id}: {student.Name}");
-            }
-        }
-    }
-    public void Test2()
-    {
-        IQueryable<Course> GetAllCourses()
-        {
-            using var context = new StudentsDbContext();
-            return context.Courses;
+            printers.Add(delegate { Console.WriteLine(i); });
         }
 
-        var courses = GetAllCourses();
-        foreach (var course in courses)
+        foreach (var printer in printers)
         {
-            Console.WriteLine(course.Id);
+            printer();
         }
     }
-
 }
